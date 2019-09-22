@@ -1,0 +1,30 @@
+<div class="history">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="card card-history">
+                <div class="card-header">
+                    <h6 class="card-title"> Your blood pressure history </h6>
+                </div>
+                <div class="card-body">
+                    <table id="resent-table" style="width:100%">
+                        <tr>
+                            <th style="width: 25%"><u><b>Date ( DD-MM-YYY )</b></u></th>
+                            <th style="width: 25%">Systolic (SBP)</th>
+                            <th style="width: 25%">Diastolic (DBP)</th>
+                            <th style="width: 25%"><u><b>Status</b></u></th>
+                        </tr>
+                        <tr *ngFor="let data of mockData; let i = index">
+                            <td>
+                                {{data['date']}}
+                                <span class="badge badge-pill badge-danger" *ngIf="i === (mockData.length - 1)">Last Update</span>
+                            </td>
+                            <td>{{data['SBP']}} mm Hg</td>
+                            <td>{{data['DBP']}} mm Hg</td> 
+                            <td [style.background-color]="getBackgroundColor(data.status)" style="color: black"><b>{{data.status}}</b></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>

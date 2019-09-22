@@ -1,0 +1,140 @@
+#user-account {
+    background-color: #eeeeee;
+    min-block-size: 98vh;
+}
+
+@media screen and (min-width: 992px) {
+
+    #sidebar-left{
+        margin: 0;
+        padding: 0;
+        background: #f8f9fa;
+        min-height: 100vh;
+        width: 300px;
+        float: right;
+        position: fixed;
+    }
+
+    #main-content {
+        margin-left: 300px;
+        background-color: #E9ECF0;
+        /* padding: 20px 0px 20px 0px; */
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #sidebar-right{
+        margin: 0;
+        padding: 0;
+        background-color: #f1f1f1;
+        widows: 100%;
+        position: relative;
+    }
+
+    #main-content{
+        widows: 100%;
+        position: relative;
+    }
+}
+
+.main-content{
+    padding: 20px 0px 20px 0px;
+}
+
+.nav-section{
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.nav-section ul.nav li.nav-item {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.nav>li.active {
+    background-color: #dee2e6;
+}
+
+
+/* .nav>li:not(.active):hover {
+    background-color: #777;
+} */
+
+li.nav-item .nav-link i {
+    font-size: 15px;
+    font-size: 25px;
+    float: left;
+    margin-right: 15px;
+    line-height: 30px;
+    width: 30px;
+    text-align: center;
+}
+
+#main-content .navbar li.nav-item .nav-link i {
+    line-height: 20px;
+    font-size: 15px;
+    margin-right: 0px;
+}
+
+li.nav-item .nav-link p {
+    margin: 0;
+    line-height: 30px;
+    font-size: 14px;
+    position: relative;
+    display: block;
+    height: auto;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.profile-head {
+    padding-bottom: 15px;
+    border-bottom: 1px solid black;
+}
+
+.profile-head h1{
+    color: black;
+    font-size: 36px;
+    font-weight: 600;
+    margin: 18px 0 0;
+
+}
+
+.profile-head small{
+    float: left;
+    width: 100%;
+    font-size: 14px;
+    color: #343A41;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.profile-head h5 {
+    font-size: 1.0rem;
+}
+
+.row{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+/* .main-body {
+    padding-top: 50px;
+} */
+
+.navbar-right{
+    float: right;
+}
+
+.navbar.navbar-expand-sm {
+    /* position: fixed; */
+    background-color: transparent;
+    z-index: 1;
+    color: #0062cc;
+    border-bottom: 1px solid #22222226;
+}
+
+.navbar-nav .nav-item .nav-link{
+    color: #0062cc;
+}

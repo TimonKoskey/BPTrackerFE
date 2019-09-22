@@ -1,0 +1,10 @@
+
+.btn.btn-success{
+    margin-top: 30px;
+}
+
+@media only screen and (max-width: 767px) {
+    .btn.btn-success{
+        width: 150px;
+    }
+  }

@@ -1,0 +1,41 @@
+.average-col{
+    padding: 0px
+}
+
+.top-row .card{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* .top-row .card p{
+    font-size: 15px;
+    margin-bottom: 0px;
+} */
+
+.card-header .card-title{
+    /* font-size: 15px; */
+    /* font-size: 1rem; */
+    margin-bottom: 0px;
+    color: #222;
+}
+
+.chart-row{
+    margin-top: 40px;
+}
+
+.row{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.average-col .card-stats{
+    height: 150px;
+}
+
+/* .chart-row #stats #myChart{
+    height: 300px;
+} */
+
+.card-header{
+    background-color: white;
+}

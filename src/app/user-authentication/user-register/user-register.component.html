@@ -1,0 +1,77 @@
+<div class="card">
+  <div class="card-body">
+    <div class="news-title" style="text-align: center">
+      <h2 class=" title-small"><a href="#"> Sign up her to get started</a></h2>
+    </div>
+    <div class="sign-up-form">
+      <form class="form" [formGroup]="registerUser" (ngSubmit)="onSubmit()" autocomplete="false">
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" formControlName="email">
+          </div>
+          <div class="col-md-12 form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" formControlName="first_name">
+          </div>
+          <div class="col-md-12 form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" formControlName="last_name">
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6 col-sm-6 form-group">
+                <label>Age</label>
+                <input type="number" class="form-control" formControlName="age">
+              </div>
+              <div class="col-md-6 col-sm-6 form-group">
+                <label>Gender</label>
+                <select class="form-control" formControlName="gender">
+                  <option selected disabled>select gender</option>
+                  <option> Male</option>
+                  <option> Female</option>
+                  <option> Other</option>
+                </select>
+              </div>
+              <div class="col-md-4 col-sm-12 form-group">
+                <label>County</label>
+                <input type="number" class="form-control" formControlName="county">
+              </div> 
+              <div class="col-md-4 col-sm-12 form-group">
+                <label>Sub County</label>
+                <input type="number" class="form-control" formControlName="sub_county">
+              </div>
+              <div class="col-md-4 col-sm-12 form-group">
+                <label>Village or Estate</label>
+                <input type="number" class="form-control" formControlName="village_or_estate">
+              </div>  
+            </div>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Phone Number</label>
+            <input type="text" class="form-control" formControlName="main_phone_number">
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Alternative Phone Number</label>
+            <input type="text" class="form-control" formControlName="alt_phone_number">
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6 col-sm-6 form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="password" formControlName="password" autocomplete="false">
+              </div>
+              <div class="col-md-6 col-sm-6 form-group">
+                <label>Password (Confirm)</label>
+                <input type="password" class="form-control" formControlName="confirm_password" placeholder="confirm password">
+              </div>    
+            </div>
+          </div>
+          <div class="col-md-12 form-group" style="text-align: center">
+            <button type="submit" class="btn btn-success btn-lg" style="width: 50%">submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

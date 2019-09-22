@@ -1,0 +1,17 @@
+.history{
+    margin-top: 15px;
+}
+
+table#resent-table tr td{
+    border: 1px solid;
+    padding: 15px 0px 15px 20px;
+}
+
+table#resent-table tr th{
+    text-align: center;
+}
+
+.row{
+    margin-left: 0px;
+    margin-right: 0px;
+}
