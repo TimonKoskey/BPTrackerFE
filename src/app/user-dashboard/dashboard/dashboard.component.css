@@ -1,3 +1,7 @@
+#dashboard{
+    padding: 15px 15px 15px 15px;
+}
+
 .average-col{
     padding: 0px
 }
@@ -7,14 +11,7 @@
     margin-bottom: 15px;
 }
 
-/* .top-row .card p{
-    font-size: 15px;
-    margin-bottom: 0px;
-} */
-
 .card-header .card-title{
-    /* font-size: 15px; */
-    /* font-size: 1rem; */
     margin-bottom: 0px;
     color: #222;
 }
@@ -32,10 +29,35 @@
     height: 150px;
 }
 
-/* .chart-row #stats #myChart{
-    height: 300px;
-} */
-
 .card-header{
     background-color: white;
+}
+
+.bpform .card-body .bpform-top p{
+    /* font-size: 1rem; */
+    color: blue;
+    margin-bottom: 0px;
+}
+
+.card-header .form-info{
+    margin-bottom: 0px;
+    text-align: center
+}
+
+.card-header .form-info.important{
+    color: red;
+}
+
+@media screen and (min-width: 992px) {
+    .card.bpform{
+        max-width: 300px;
+        float: right;
+        height: 450px;
+    }
+
+    .card.bp-trends-chart{
+        max-width: 720px;
+        height: 450px;
+    }
+
 }

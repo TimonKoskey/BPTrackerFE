@@ -1,8 +1,8 @@
-/* .carousel-caption {
-    position: relative;
-} */
-
 .carousel-image{
-    width: 700px;
-    height: 500px;
+    width: 100%;
+    height: 70vh;
 }
+
+/* .carousel.slide{
+    height: 70vh;
+} */

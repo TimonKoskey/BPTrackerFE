@@ -1,30 +1,45 @@
-<div class="card">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+<div class="card sign-up">
+  <div class="card-header" style="text-align: center">
+      <h2 class=" title-small">Sign up here to get started</h2>
+  </div>
   <div class="card-body">
-    <div class="news-title" style="text-align: center">
-      <h2 class=" title-small"><a href="#"> Sign up her to get started</a></h2>
-    </div>
     <div class="sign-up-form">
       <form class="form" [formGroup]="registerUser" (ngSubmit)="onSubmit()" autocomplete="false">
         <div class="row">
-          <div class="col-md-12 form-group">
-            <label>Email</label>
-            <input type="email" class="form-control" formControlName="email">
-          </div>
-          <div class="col-md-12 form-group">
+
+          <div class="col-md-4 form-group">
             <label>First Name</label>
             <input type="text" class="form-control" formControlName="first_name">
+            <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched || registerUserFormSubmited)">
+              <div *ngIf="first_name.errors.required">
+                <small class="error-message">required field!</small>
+              </div>
+            </div>
           </div>
-          <div class="col-md-12 form-group">
+          <div class="col-md-4 form-group">
             <label>Last Name</label>
             <input type="text" class="form-control" formControlName="last_name">
+            <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched || registerUserFormSubmited)">
+              <div *ngIf="last_name.errors.required">
+                <small class="error-message">required field!</small>
+              </div>
+            </div>
           </div>
-          <div class="col-md-12">
-            <div class="row">
-              <div class="col-md-6 col-sm-6 form-group">
+          <!-- <div class="col-md-12"> -->
+            <!-- <div class="row"> -->
+              <div class="col-md-4 col-sm-6 form-group">
                 <label>Age</label>
                 <input type="number" class="form-control" formControlName="age">
+                <div *ngIf="age.invalid && (age.dirty || age.touched || registerUserFormSubmited)">
+                  <div *ngIf="age.errors.required">
+                    <small class="error-message">required field!</small>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-6 col-sm-6 form-group">
+              <div class="col-md-4 col-sm-6 form-group">
                 <label>Gender</label>
                 <select class="form-control" formControlName="gender">
                   <option selected disabled>select gender</option>
@@ -32,46 +47,92 @@
                   <option> Female</option>
                   <option> Other</option>
                 </select>
+                <div *ngIf="gender.invalid && (gender.dirty || gender.touched || registerUserFormSubmited)">
+                  <div *ngIf="gender.errors.required">
+                    <small class="error-message">required field!</small>
+                  </div>
+                </div>
               </div>
+              <div class="col-md-4 form-group">
+                  <label>Phone Number</label>
+                  <input type="text" class="form-control" formControlName="main_phone_number">
+                  <div *ngIf="main_phone_number.invalid && (main_phone_number.dirty || main_phone_number.touched || registerUserFormSubmited)">
+                    <div *ngIf="main_phone_number.errors.required">
+                      <small class="error-message">required field!</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 form-group">
+                  <label>Alternative Phone Number</label>
+                  <input type="text" class="form-control" formControlName="alt_phone_number">
+                </div>
               <div class="col-md-4 col-sm-12 form-group">
                 <label>County</label>
-                <input type="number" class="form-control" formControlName="county">
+                <input type="text" class="form-control" formControlName="county">
+                <div *ngIf="county.invalid && (county.dirty || county.touched || registerUserFormSubmited)">
+                  <div *ngIf="county.errors.required">
+                    <small class="error-message">required field!</small>
+                  </div>
+                </div>
               </div> 
               <div class="col-md-4 col-sm-12 form-group">
                 <label>Sub County</label>
-                <input type="number" class="form-control" formControlName="sub_county">
+                <input type="text" class="form-control" formControlName="sub_county">
+                <div *ngIf="sub_county.invalid && (sub_county.dirty || sub_county.touched || registerUserFormSubmited)">
+                  <div *ngIf="sub_county.errors.required">
+                    <small class="error-message">required field!</small>
+                  </div>
+                </div>
               </div>
               <div class="col-md-4 col-sm-12 form-group">
                 <label>Village or Estate</label>
-                <input type="number" class="form-control" formControlName="village_or_estate">
+                <input type="text" class="form-control" formControlName="village_or_estate">
+                <div *ngIf="village_or_estate.invalid && (village_or_estate.dirty || village_or_estate.touched || registerUserFormSubmited)">
+                  <div *ngIf="email.errors.required">
+                    <small class="error-message">required field!</small>
+                  </div>
+                </div>
               </div>  
+            <!-- </div> -->
+          <!-- </div> -->
+          <div class="col-md-4 form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" formControlName="email">
+            <div *ngIf="email.invalid && (email.dirty || email.touched || registerUserFormSubmited)">
+              <div *ngIf="email.errors.required">
+                <small class="error-message">required field!</small>
+              </div>
             </div>
           </div>
-          <div class="col-md-6 form-group">
-            <label>Phone Number</label>
-            <input type="text" class="form-control" formControlName="main_phone_number">
-          </div>
-          <div class="col-md-6 form-group">
-            <label>Alternative Phone Number</label>
-            <input type="text" class="form-control" formControlName="alt_phone_number">
-          </div>
-          <div class="col-md-12">
-            <div class="row">
-              <div class="col-md-6 col-sm-6 form-group">
+          <!-- <div class="col-md-12"> -->
+            <!-- <div class="row"> -->
+              <div class="col-md-4 col-sm-6 form-group">
                 <label>Password</label>
                 <input type="password" class="form-control" placeholder="password" formControlName="password" autocomplete="false">
+                <div *ngIf="password.invalid && (password.dirty || password.touched || registerUserFormSubmited)">
+                  <div *ngIf="email.errors.required">
+                    <small class="error-message">required field!</small>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-6 col-sm-6 form-group">
+              <div class="col-md-4 col-sm-6 form-group">
                 <label>Password (Confirm)</label>
-                <input type="password" class="form-control" formControlName="confirm_password" placeholder="confirm password">
+                <input type="password" class="form-control" name="confirm_password" placeholder="confirm password"
+                [(ngModel)]="confirm_password" #confirm="ngModel" [ngModelOptions]="{standalone: true}">
+                <p *ngIf="password.value != confirm_password && registerUserFormSubmited">
+                  <small class="error-message">passwords do not match</small>
+                </p>
               </div>    
-            </div>
-          </div>
+            <!-- </div> -->
+          <!-- </div> -->
           <div class="col-md-12 form-group" style="text-align: center">
             <button type="submit" class="btn btn-success btn-lg" style="width: 50%">submit</button>
           </div>
         </div>
       </form>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </div>

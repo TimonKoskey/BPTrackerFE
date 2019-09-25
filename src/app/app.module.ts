@@ -18,6 +18,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { UserRegisterComponent } from './user-authentication/user-register/user-register.component';
 import { AuthenticationAPIService } from './user-authentication/authentication-api.service';
+import { SessionDataService } from './session-data/session-data.service';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { AuthenticationAPIService } from './user-authentication/authentication-a
   providers: [ 
     UnsignedUserAPIService,
     AuthenticationAPIService,
+    SessionDataService
   ],
 
   bootstrap: [AppComponent]

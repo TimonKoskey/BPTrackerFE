@@ -1,160 +1,49 @@
 <div id="dashboard">
-    <div class="row top-row">
-        <div  class="col-xl-6 col-lg-6 col-md-6 col-sm-6 top-analysis">
-
-            <div class="card bpform" *ngIf="showBPForm; else confirmInputBlock">
-                <div class="card-header">
-                    <h6 class="card-title"> ADD YOUR PRESSURE RESULTS</h6>
-                </div>
-                <div class="card-body">
-                    <form [formGroup]="bpform" (ngSubmit)="onSubmit(bpform.value)">
-                        <div class="form-group">
-                            <label>Enter systolic (SBP)</label>
-                            <input type="number" class="form-control" formControlName="SBP">
-                        </div>
-                        <div class="form-group">
-                            <label>Enter diastolic (DBP)</label>
-                            <input type="number" class="form-control" formControlName="DBP">
-                        </div>
-                        <div class="form-group">
-                            <label>Enter date (When test was taken)</label>
-                            <input type="date" class="form-control" formControlName="date">
-                        </div>
-                        <div class="form-group" style="text-align: center">
-                            <button type="submit" class="btn btn-success">submit</button>
-                        </div>
-                    </form>
-                </div>
+    <!-- <div class="row"> -->
+        <div class="card bpform" *ngIf="showBPForm; else confirmInputBlock">
+            <div class="card-header">
+                <h6 class="card-title"> TAKE A BLOOD PRESSURE TEST</h6>
+                <p class="form-info important">(NOTE please take the test 3 times)</p>
             </div>
-            <ng-template #confirmInputBlock>
-                <div class="card">
-                    <div class="card-header" style="text-align: center">
-                        <p>please confirm your input</p>
+            <div class="card-body">
+                <form [formGroup]="bpform" (ngSubmit)="onSubmit(bpform.value)">
+                    <div class="form-group">
+                        <label>Enter systolic (SBP)</label>
+                        <input type="number" class="form-control" formControlName="SBP">
                     </div>
-                    <div class="card-body">
-                        <p><span>Systolic (SBP): </span> <span>{{submitedValues.SBP}}</span></p>
-                        <p><span>Diastolic (DBP): </span> <span>{{submitedValues.DBP}}</span></p>
-                        <p><span>Date: </span> <span>{{submitedValues.date}}</span></p>
-                        <div style="text-align: center">
-                            <button class="btn btn-success" (click)="confirmedSubmit()">upload</button>
-                        </div>
+                    <div class="form-group">
+                        <label>Enter diastolic (DBP)</label>
+                        <input type="number" class="form-control" formControlName="DBP">
                     </div>
-                </div>
-            </ng-template>
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title"> Last time you added a test</h6>
-                </div>
-                <div class="card-body table-responsive">
-                    <table width="100%">
-                        <tr>
-                            <th width="33%">date</th>
-                            <th width="33%">SBP</th>
-                            <th>DBP</th>
-                        </tr>
-                        <tr>
-                            <td>07/16/2019</td>
-                            <td>135</td>
-                            <td>86</td>
-                        </tr>
-                    </table>
-                </div>
+                    <div class="form-group">
+                        <label>Enter pulse rate</label>
+                        <input type="number" class="form-control" formControlName="pulse_rate">
+                    </div>
+                    <div *ngIf="submissions_count === 0" class="bpform-top">
+                        <p>This is FIRST (1st) test.. Two more to go!</p>
+                    </div>
+                    <div *ngIf="submissions_count === 1" class="bpform-top">
+                        <p>This is your SECOND ("2nd") test.. One more to go!</p>
+                    </div>
+                    <div *ngIf="submissions_count === 2" class="bpform-top">
+                        <p>Your last test!</p>
+                    </div>
+                    <div class="form-group" style="text-align: center;margin-top: 15px">
+                        <button type="submit" class="btn btn-success">submit</button>
+                    </div>
+                </form>
             </div>
-
         </div>
-        <div  class="col-xl-6 col-lg-6 col-md-6 col-sm-6 top-analysis">
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-6 average-col">
-                    <div class="card card-stats">
-                        <div class="card-header">
-                            <!-- <h6>Average</h6> -->
-                            <h6 class="card-title">Average</h6>
-                            <small>last 5 uploads</small>
-                        </div>
-                        <div class="card-body table-responsive">
-                            <table width="100%">
-                                <tr>
-                                    <th>SBP</th>
-                                    <th>DBP</th>
-                                </tr>
-                                <tr>
-                                    <td>111</td>
-                                    <td>74</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-6 average-col">
-                    <div class="card card-stats">
-                        <div class="card-header">
-                            <!-- <h6>Total Uploads</h6> -->
-                            <h6 class="card-title">Total Uploads</h6>
-                            <small>all your test records</small>
-                        </div>
-                        <div class="card-body">
-                            <h4>15</h4>
-                        </div>
-                    </div>
-                </div>
+        <div class="card bp-trends-chart">
+            <div class="card-header">
+                <h6 class="card-title">BLOOD PRESSURE TREND GRAPH</h6>
+                <p class="form-info">(NOTE please take the test 3 times)</p>
             </div>
-            <div class="card">
-                <div class="card-header">
-                    <!-- <p>your fist update</p> -->
-                    <h6 class="card-title">Your fist update</h6>
-                </div>
-                <div class="card-body table-responsive">
-                    <table width="100%">
-                        <tr>
-                            <th width="33%">date</th>
-                            <th width="33%">SBP</th>
-                            <th>DBP</th>
-                        </tr>
-                        <tr>
-                            <td>07/16/2019</td>
-                            <td>135</td>
-                            <td>86</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <!-- <p>highest recorded BP</p> -->
-                    <h6 class="card-title">Highest recorded BP</h6>
-                </div>
-                <div class="card-body table-responsive">
-                    <table width="100%">
-                        <tr>
-                            <th width="33%">date</th>
-                            <th width="33%">SBP</th>
-                            <th>DBP</th>
-                        </tr>
-                        <tr>
-                            <td>07/16/2019</td>
-                            <td>135</td>
-                            <td>86</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="row chart-row">
-        <div class="col-xl-12 col-lg-12 col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <!-- <h6>Blood pressure trend graph</h6> -->
-                    <h6 class="card-title">BLOOD PRESSURE TREND GRAPH</h6>
-                </div>
-                <div class="card-body">
-                    <div id="stats">
-                        <canvas id="myChart"></canvas>
-                    </div>
+            <div class="card-body">
+                <div id="stats">
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
 </div>

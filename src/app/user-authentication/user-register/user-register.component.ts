@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl} from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationAPIService } from '../authentication-api.service'
 
 @Component({
   selector: 'app-user-register',
@@ -8,9 +10,13 @@ import { FormGroup, FormBuilder, Validators, FormArray, FormControl} from '@angu
 })
 export class UserRegisterComponent implements OnInit {
   registerUser: FormGroup;
+  registerUserFormSubmited = false;
+  confirm_password
 
   constructor(
     private fb: FormBuilder,
+    private route: Router,
+    private authenticationService: AuthenticationAPIService
   ) { }
 
   ngOnInit() {
@@ -26,12 +32,18 @@ export class UserRegisterComponent implements OnInit {
       'sub_county': new FormControl('', Validators.required),
       'village_or_estate': new FormControl('', Validators.required),
       'password': new FormControl('', [Validators.required]),
-      'confirm_password': new FormControl('', [Validators.required]),
     });
   }
 
   onSubmit() {
-    console.log(this.registerUser.value)
+    if (this.registerUser.valid && this.password.value === this.confirm_password){
+      this.authenticationService.registerClient(this.registerUser.value).subscribe(data => {
+        this.route.navigate(['/account/dashboard']);
+      }, (error) => {
+        
+      })
+    }
+    this.registerUserFormSubmited = true;
   }
 
   get email() { return this.registerUser.get('email'); }
@@ -45,5 +57,4 @@ export class UserRegisterComponent implements OnInit {
   get sub_county() { return this.registerUser.get('sub_county'); }
   get village_or_estate() { return this.registerUser.get('village_or_estate'); }
   get password() { return this.registerUser.get('password'); }
-  get confirm_password() { return this.registerUser.get('confirm_password'); }
 }

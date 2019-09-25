@@ -19,7 +19,6 @@ export class UserHistoryComponent implements OnInit {
     this.firestore.collection('patient-records').valueChanges().subscribe(data => {
       this.mockData = data;
       this.mockData.sort(function(a, b){return a.id - b.id})
-      this.dataservice.Data = this.mockData;
    });
   }
 

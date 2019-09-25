@@ -10,6 +10,7 @@ import { AuthenticationAPIService } from '../user-authentication/authentication-
 })
 export class LandingPageComponent implements OnInit {
   loginForm:FormGroup;
+  loginErrors = false;
 
   constructor(
     private fb: FormBuilder,
@@ -31,6 +32,8 @@ export class LandingPageComponent implements OnInit {
     }
     this.authenticationService.clientLogin(login_cred).subscribe(data => {
       this.route.navigate(['/account/dashboard']);
+    }, (error) =>{
+      this.loginErrors = true;
     })
   }
 

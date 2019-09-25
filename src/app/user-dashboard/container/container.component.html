@@ -10,37 +10,43 @@
                 </div>
                 <div class="nav-section">
                     <ul class="nav">
-                    <li class="nav-item" routerLinkActive="active" routerLink="/account/dashboard">
-                        <a class="nav-link">
-                        <i class="material-icons">dashboard</i>
-                        <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li class="nav-item" routerLinkActive="active" routerLink="/account/history">
-                        <a class="nav-link">
-                        <i class="material-icons">history</i>
-                        <p>you history</p>
-                        </a>
-                    </li>
-                    <li class="nav-item" routerLinkActive="active" routerLink="/account/profile">
-                        <a class="nav-link">
-                        <span class="menu_icon"><i class="material-icons">person</i></span>
-                        <p>your profile</p>
-                        </a>
-                    </li>
-                    <!-- <li class="nav-item" routerLinkActive="active" routerLink="/account/upload">
-                        <a class="nav-link">
-                            <i class="material-icons">insert_chart</i>
-                            <p>analysis</p>
-                        </a>
-                    </li> -->
+                        <li class="nav-item" routerLinkActive="active" routerLink="/account/dashboard">
+                            <a class="nav-link">
+                            <i class="material-icons">dashboard</i>
+                            <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item" routerLinkActive="active" routerLink="/account/groups">
+                            <a class="nav-link">
+                                <i class="material-icons">group</i>
+                                <p>groups</p>
+                            </a>
+                        </li>
+                        <li class="nav-item" routerLinkActive="active" routerLink="/account/history">
+                            <a class="nav-link">
+                            <i class="material-icons">history</i>
+                            <p>you history</p>
+                            </a>
+                        </li>
+                        <li class="nav-item" routerLinkActive="active" routerLink="/account/groups">
+                            <a class="nav-link">
+                                <i class="material-icons">insert_chart</i>
+                                <p>analysis</p>
+                            </a>
+                        </li>
+                        <li class="nav-item" routerLinkActive="active" routerLink="/account/profile">
+                            <a class="nav-link">
+                            <span class="menu_icon"><i class="material-icons">person</i></span>
+                            <p>your profile</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     
         <div id="main-content">
-            <nav class="navbar navbar-expand-sm navbar-light justify-content-end">
+            <nav class="navbar navbar-expand-sm navbar-light justify-content-end fixed-top">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a href="#" class="nav-link"><span class="ping"></span><i class="fa fa-envelope-o"></i></a> 
@@ -58,8 +64,11 @@
                     </li>
                 </ul>
             </nav>
-            <div class="main-body">
-                <router-outlet></router-outlet>
+            <div class="main-content-body">
+                <div id="groups-and-messages-bar" class="nav-pad"></div>
+                <div id="main-body" class="nav-pad">
+                    <router-outlet></router-outlet>
+                </div>
             </div>
         </div>
     </div>

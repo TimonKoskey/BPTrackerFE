@@ -13,6 +13,7 @@
         width: 300px;
         float: right;
         position: fixed;
+        z-index: 2;
     }
 
     #main-content {
@@ -23,12 +24,8 @@
 }
 
 @media screen and (max-width: 992px) {
-    #sidebar-right{
-        margin: 0;
-        padding: 0;
-        background-color: #f1f1f1;
-        widows: 100%;
-        position: relative;
+    #sidebar-left{
+        display: none;
     }
 
     #main-content{
@@ -119,22 +116,41 @@ li.nav-item .nav-link p {
     margin-right: 0px;
 }
 
-/* .main-body {
-    padding-top: 50px;
-} */
-
 .navbar-right{
     float: right;
 }
 
 .navbar.navbar-expand-sm {
-    /* position: fixed; */
-    background-color: transparent;
-    z-index: 1;
+    background-color: #dee2e6;
     color: #0062cc;
-    border-bottom: 1px solid #22222226;
+    z-index: 1;
+    /* border-bottom: 1px solid #22222226; */
 }
 
 .navbar-nav .nav-item .nav-link{
     color: #0062cc;
+}
+
+/* @media screen and (min-width: 992px) {
+
+    #main-body {
+        background-color: #E9ECF0;
+        width: 800px;
+        min-height: 100vh;
+    }
+
+    #groups-and-messages-bar{
+        margin: 0;
+        padding: 0;
+        background: #f8f9fa;
+        min-height: 100vh;
+        float: right;
+        position: fixed;
+        margin-left: 800px;
+        width: 300px;
+    }
+} */
+
+.nav-pad{ 
+ padding-top: 30px;
 }

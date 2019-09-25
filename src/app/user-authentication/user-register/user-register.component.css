@@ -1,0 +1,11 @@
+.card.sign-up .card-header{
+    background-color: #f8f9fa;
+}
+
+.title-small {
+    color: #28a745;
+}
+
+.error-message{
+    color: red;
+}
