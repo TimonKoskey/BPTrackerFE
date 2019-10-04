@@ -1,44 +1,47 @@
-#user-account {
-    background-color: #eeeeee;
-    min-block-size: 98vh;
-}
+.sidebar {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: #f8f9fa;
+    overflow-x: hidden;
+    transition: 0.5s;
+  }
 
-@media screen and (min-width: 992px) {
+  .sidebar a:hover {
+    background-color: #e9ecef;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color: #444;
+  }
+  
+  #main-content {
+    transition: margin-left .5s;
+    padding: 16px;
+    margin-left: 300px;
+    background-color: #E9ECF0;
+    padding: 0px 0px 20px 0px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
 
-    #sidebar-left{
-        margin: 0;
-        padding: 0;
-        background: #f8f9fa;
-        min-height: 100vh;
-        width: 300px;
-        float: right;
-        position: fixed;
-        z-index: 2;
-    }
-
-    #main-content {
-        margin-left: 300px;
-        background-color: #E9ECF0;
-        /* padding: 20px 0px 20px 0px; */
-    }
-}
-
-@media screen and (max-width: 992px) {
-    #sidebar-left{
-        display: none;
-    }
-
-    #main-content{
-        widows: 100%;
-        position: relative;
-    }
-}
-
-.main-content{
-    padding: 20px 0px 20px 0px;
-}
-
-.nav-section{
+  .nav-section{
     margin-top: 20px;
     margin-left: 10px;
     margin-right: 10px;
@@ -50,13 +53,8 @@
 }
 
 .nav>li.active {
-    background-color: #dee2e6;
+    background-color:#adb5bd;
 }
-
-
-/* .nav>li:not(.active):hover {
-    background-color: #777;
-} */
 
 li.nav-item .nav-link i {
     font-size: 15px;
@@ -124,33 +122,19 @@ li.nav-item .nav-link p {
     background-color: #dee2e6;
     color: #0062cc;
     z-index: 1;
-    /* border-bottom: 1px solid #22222226; */
 }
 
 .navbar-nav .nav-item .nav-link{
     color: #0062cc;
 }
 
-/* @media screen and (min-width: 992px) {
-
-    #main-body {
-        background-color: #E9ECF0;
-        width: 800px;
-        min-height: 100vh;
+@media (min-width: 576px){
+    .navbar-expand-sm {
+        justify-content: space-between;
     }
+}
 
-    #groups-and-messages-bar{
-        margin: 0;
-        padding: 0;
-        background: #f8f9fa;
-        min-height: 100vh;
-        float: right;
-        position: fixed;
-        margin-left: 800px;
-        width: 300px;
-    }
-} */
-
-.nav-pad{ 
- padding-top: 30px;
+.myfixed-top{
+    position: fixed;
+    top: 0;
 }

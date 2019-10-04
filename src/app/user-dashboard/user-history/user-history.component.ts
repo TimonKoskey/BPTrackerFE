@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { SessionDataService } from '../../session-data/session-data.service';
 import { UserDashboardSingletonService } from '../user-dashboard-api/user-dashboard-singleton.service';
 
 @Component({
@@ -8,18 +8,23 @@ import { UserDashboardSingletonService } from '../user-dashboard-api/user-dashbo
   styleUrls: ['./user-history.component.css']
 })
 export class UserHistoryComponent implements OnInit {
-  mockData;
+  user;
+  userdata;
 
   constructor(
-    private firestore: AngularFirestore,
     private dataservice: UserDashboardSingletonService,
+    private session_data: SessionDataService
   ) { }
 
   ngOnInit() {
-    this.firestore.collection('patient-records').valueChanges().subscribe(data => {
-      this.mockData = data;
-      this.mockData.sort(function(a, b){return a.id - b.id})
-   });
+    this.user = this.session_data.user
+    this.dataservice.getClientBPDataList(this.user['id']).subscribe(dataset => {
+        this.userdata = dataset;
+        this.userdata = this.dataservice.setDateTime(this.userdata)
+        console.log(this.userdata)
+    }, (error) => {
+
+    });
   }
 
   getBackgroundColor(status){

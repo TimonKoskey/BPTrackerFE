@@ -1,6 +1,7 @@
-<div id="user-account">
+<div class="wrapper user-account">
     <div class="main">
-        <div id="sidebar-left">
+        <div id="sidebar-left" class="sidebar">
+            <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a> -->
             <div class="row">
                 <div class="col-md-12 profile-head" style="text-align: center">
                     <h1>
@@ -28,7 +29,7 @@
                             <p>you history</p>
                             </a>
                         </li>
-                        <li class="nav-item" routerLinkActive="active" routerLink="/account/groups">
+                        <li class="nav-item" routerLinkActive="active" routerLink="/account/analytics">
                             <a class="nav-link">
                                 <i class="material-icons">insert_chart</i>
                                 <p>analysis</p>
@@ -44,10 +45,14 @@
                 </div>
             </div>
         </div>
-    
+            
         <div id="main-content">
-            <nav class="navbar navbar-expand-sm navbar-light justify-content-end fixed-top">
-                <ul class="navbar-nav">
+            <!-- <button class="openbtn" onclick="sideNav()">☰ Toggle Sidebar</button>   -->
+            <div id="nav-collapse" class="navbar navbar-expand-sm navbar-light justify-content-end">
+                <div id="toggle-space">
+                    <a id="navbar-toggle" (click)="sideNav()"><i class="fa fa-bars menu-icon fa-2x" aria-hidden="true"></i></a>
+                </div>
+                <ul class="navbar-nav" id="nav-list">
                     <li class="nav-item active">
                         <a href="#" class="nav-link"><span class="ping"></span><i class="fa fa-envelope-o"></i></a> 
                     </li>
@@ -55,7 +60,7 @@
                         <a href="#" class="nav-link"><i class="fa fa-bell-o"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a routerLink="" class="nav-link">
+                        <a (click)="logout()" style="cursor: pointer" class="nav-link">
                             <i class="fa fa-sign-out"></i>
                             <span class="logout">
                                 Logout
@@ -63,9 +68,9 @@
                         </a>
                     </li>
                 </ul>
-            </nav>
+            </div>
             <div class="main-content-body">
-                <div id="groups-and-messages-bar" class="nav-pad"></div>
+                <!-- <div id="groups-and-messages-bar" class="nav-pad"></div> -->
                 <div id="main-body" class="nav-pad">
                     <router-outlet></router-outlet>
                 </div>

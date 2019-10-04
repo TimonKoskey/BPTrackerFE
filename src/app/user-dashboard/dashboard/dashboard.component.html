@@ -1,26 +1,42 @@
 <div id="dashboard">
     <!-- <div class="row"> -->
-        <div class="card bpform" *ngIf="showBPForm; else confirmInputBlock">
+        <div class="card bpform">
+            <div *ngIf="showBPForm; else moodFormBlock">
             <div class="card-header">
                 <h6 class="card-title"> TAKE A BLOOD PRESSURE TEST</h6>
                 <p class="form-info important">(NOTE please take the test 3 times)</p>
             </div>
             <div class="card-body">
-                <form [formGroup]="bpform" (ngSubmit)="onSubmit(bpform.value)">
+                <form [formGroup]="bpform" (ngSubmit)="onSubmitBPForm(bpform.value)">
                     <div class="form-group">
                         <label>Enter systolic (SBP)</label>
                         <input type="number" class="form-control" formControlName="SBP">
+                        <div *ngIf="SBP.invalid && (SBP.dirty || SBP.touched)">
+                            <div *ngIf="SBP.errors.required">
+                                <small class="error-message">required field!</small>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Enter diastolic (DBP)</label>
                         <input type="number" class="form-control" formControlName="DBP">
+                        <div *ngIf="DBP.invalid && (DBP.dirty || DBP.touched)">
+                            <div *ngIf="DBP.errors.required">
+                                <small class="error-message">required field!</small>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Enter pulse rate</label>
                         <input type="number" class="form-control" formControlName="pulse_rate">
+                        <div *ngIf="pulse_rate.invalid && (pulse_rate.dirty || pulse_rate.touched)">
+                            <div *ngIf="pulse_rate.errors.required">
+                                <small class="error-message">required field!</small>
+                            </div>
+                        </div>
                     </div>
                     <div *ngIf="submissions_count === 0" class="bpform-top">
-                        <p>This is FIRST (1st) test.. Two more to go!</p>
+                        <p>This is the FIRST (1st) test.. Two more to go!</p>
                     </div>
                     <div *ngIf="submissions_count === 1" class="bpform-top">
                         <p>This is your SECOND ("2nd") test.. One more to go!</p>
@@ -29,19 +45,38 @@
                         <p>Your last test!</p>
                     </div>
                     <div class="form-group" style="text-align: center;margin-top: 15px">
-                        <button type="submit" class="btn btn-success">submit</button>
+                        <button type="submit" class="btn btn-success submit-form">next</button>
                     </div>
                 </form>
             </div>
-        </div>
-        <div class="card bp-trends-chart">
-            <div class="card-header">
-                <h6 class="card-title">BLOOD PRESSURE TREND GRAPH</h6>
-                <p class="form-info">(NOTE please take the test 3 times)</p>
             </div>
+        </div>
+
+        <ng-template #moodFormBlock>
+            <div class="card-body" *ngIf="showMoodForm; else confirmInputsBlock">
+                <form [formGroup]="moodform" (ngSubmit)="confirmedSubmitions()">
+                    <div class="form-group">
+                        <label>please pick an emoji that best describes your mood right now</label>
+                        <input type="number" class="form-control" formControlName="mood">
+                    </div>
+                    <div class="form-group" style="text-align: center;margin-top: 15px">
+                        <button type="submit" class="btn btn-success submit-form"> submit results</button>
+                    </div>
+                </form>
+            </div>
+        </ng-template>
+
+        <ng-template #confirmInputsBlock>
+        </ng-template>
+
+        <div class="card bp-trends-chart">
+            <!-- <div class="card-header">
+                <h6 class="card-title">BLOOD PRESSURE TREND GRAPH</h6>
+                <p class="form-info">(last seven (7) days)</p>
+            </div> -->
             <div class="card-body">
                 <div id="stats">
-                    <canvas id="myChart"></canvas>
+                    <div id="chartContainer" style="width: 100%;"></div>
                 </div>
             </div>
         </div>

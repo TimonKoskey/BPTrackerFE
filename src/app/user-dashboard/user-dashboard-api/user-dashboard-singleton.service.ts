@@ -20,8 +20,21 @@ export class UserDashboardSingletonService {
     private session_data: SessionDataService,
   ) { }
 
+  setDateTime(user_data){
+    for(let data of user_data){
+      const datetime = data['datetime'].split('T')
+      data['date'] = datetime[0]
+      data['time'] = datetime[1]
+    }
+    return user_data
+  }
+
   getClientBPDataList(user_id){
     return this.http.get(`${this.baseUrl}/datalist/${user_id}`)
+  }
+
+  uploadTestResults(results){
+    return this.http.post(`${this.baseUrl}/upload-test`, results)
   }
 
 }

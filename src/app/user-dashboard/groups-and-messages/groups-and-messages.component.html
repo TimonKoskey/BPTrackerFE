@@ -1,0 +1,34 @@
+<div id="group-info-column">
+    <div class="group-info-tabs">
+        <button class="tablink" id="your_groups_header" (click)="changeTab('your_groups', 'your_groups_header','white')">YOUR GROUPS</button>
+        <button class="tablink" id="create_group_header" (click)="changeTab('create_group', 'create_group_header', 'white')">CREATE GROUP</button>
+    </div>
+    <div class="tab-content">
+        <div id="your_groups" class="tabcontent">
+            <!-- <h6>You currently have no groups, please create or join one.</h6> -->
+            <div>
+                <ul class="group-list">
+                    <li class="group-category">
+                        <a class="group-item">
+                            WANACHAMA GROUP
+                            <small style="float: right">6</small>
+                        </a>
+                    </li>
+                    <li class="group-category">
+                        <a class="group-item">group 2</a>
+                    </li>
+                    <li class="group-category">
+                        <a class="group-item">group 3</a>
+                    </li>
+                    <li class="group-category">
+                        <a class="group-item">group 4</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="create_group" class="tabcontent">
+            <h6>here will be a form that will enable a user to create a group </h6>
+        </div>
+    </div>
+</div>
+<div id="messages-column"></div>

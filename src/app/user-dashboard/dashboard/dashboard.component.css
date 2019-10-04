@@ -48,16 +48,33 @@
     color: red;
 }
 
+.btn.btn-success.submit-form{
+    width: 150px;
+}
+
 @media screen and (min-width: 992px) {
     .card.bpform{
         max-width: 300px;
         float: right;
-        height: 450px;
+        height: 500px;
     }
 
     .card.bp-trends-chart{
         max-width: 720px;
-        height: 450px;
+        height: 500px;
     }
 
+    .btn.btn-success.submit-form{
+        width: 100%;
+    }
+
+}
+
+.card.bp-trends-chart{
+    max-width: 720px;
+    height: 500px;
+}
+
+.error-message{
+    color: red;
 }

@@ -11,6 +11,9 @@ import { ContainerComponent } from './user-dashboard/container/container.compone
 import { DashboardComponent } from './user-dashboard/dashboard/dashboard.component';
 import { UserHistoryComponent } from './user-dashboard/user-history/user-history.component';
 import { UserProfileComponent } from './user-dashboard/user-profile/user-profile.component';
+import { GroupsAndMessagesComponent } from './user-dashboard/groups-and-messages/groups-and-messages.component';
+
+import { AuthGuard } from './user-authentication/auth.guard';
 
 
 
@@ -22,9 +25,14 @@ const routes: Routes = [
     { path: 'contact-us', component: ContactUsComponent},
   ]},
 
-  { path: 'account', component: ContainerComponent, children: [
+  { 
+    path: 'account',
+    component: ContainerComponent, 
+    canActivate: [AuthGuard],
+    children: [
     { path: '', pathMatch: 'full', redirectTo: 'dashboard'},
     { path: 'dashboard', component: DashboardComponent},
+    { path: 'groups', component: GroupsAndMessagesComponent},
     { path: 'history', component: UserHistoryComponent},
     { path: 'profile', component: UserProfileComponent},
   ]},

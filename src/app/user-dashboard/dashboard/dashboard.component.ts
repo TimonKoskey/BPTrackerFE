@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import * as $ from 'jquery';
-import * as Chart from 'chart.js';
 import { SessionDataService } from '../../session-data/session-data.service';
 import { UserDashboardSingletonService } from '../user-dashboard-api/user-dashboard-singleton.service';
+import * as CanvasJS from '../../../assets/js/canvasjs-2.3.2/canvasjs.min.js';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,10 +11,14 @@ import { UserDashboardSingletonService } from '../user-dashboard-api/user-dashbo
 })
 export class DashboardComponent implements OnInit {
     bpform: FormGroup;
+    moodform: FormGroup;
     showBPForm = true;
+    showMoodForm = false;
+    confirmFormsInputs = false;
     bpform_submissions = [];
     submissions_count = 0;
     show_bpform_errors = false;
+    userdata;
     user;
 
     constructor(
@@ -26,8 +29,9 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this.user = this.session_data.user
-        this.dataservice.getClientBPDataList(this.user['id']).subscribe(data => {
-          console.log(data)
+        this.dataservice.getClientBPDataList(this.user['id']).subscribe(dataset => {
+            this.userdata = dataset;
+            this.renderGraph();
         }, (error) => {
     
         });
@@ -37,66 +41,13 @@ export class DashboardComponent implements OnInit {
             DBP: new FormControl('',Validators.required),
             pulse_rate: new FormControl('',Validators.required)
         });
-        var SBP = [121,118,115,118,123,116,119];
-        var DBP = [88,83,79,83,89,79,80];
-        var Dates = ['02-May','03-May','04-May','05-May','06-May','07-May','08-May'];
-        
-        $(document).ready(function(){
-            var canvas = <HTMLCanvasElement> document.getElementById('myChart');
-            
-            var ctx = canvas.getContext('2d');
-            
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: Dates,
-                    datasets: [{
-                        label: 'Systolic Blood Pressure (SBP)',
-                        data: SBP,
-                        backgroundColor: [
-                            'rgba(248, 249, 250, 0.2)',
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Diastolic Blood Pressure (DBP)',
-                        data: DBP,
-                        backgroundColor: [
-                            'rgba(248, 249, 250, 0.2)',
-                        ],
-                        borderColor: [
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1   
-                    }
-                ]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                            }
-                        }
-            });
+
+        this.moodform = this.fb.group({
+            mood: new FormControl(''), 
         })
     }
 
-    onSubmit(bp_form_value) {
+    onSubmitBPForm(bp_form_value) {
         if (this.bpform.valid){ 
             if(this.submissions_count < 2){
                 const submission = {
@@ -119,6 +70,7 @@ export class DashboardComponent implements OnInit {
                 this.submissions_count = this.bpform_submissions.length;
                 this.bpform.reset()
                 this.showBPForm = false;
+                this.showMoodForm = true;
             } else {
                 this.bpform_submissions = []
                 this.submissions_count = 0;
@@ -129,9 +81,118 @@ export class DashboardComponent implements OnInit {
         }
     }
 
-    confirmedSubmit(){
-        this.bpform_submissions = []
-        this.submissions_count = 0;
-        this.showBPForm = true;
+    onSubmitMoodForm(){
+        this.showMoodForm = false;
+        this.showBPForm = false;
+        this.confirmFormsInputs = true;
     }
+
+    confirmedSubmitions(){
+        const clientBPdata = {
+            'users':this.user['id'],
+            'blood_pressure': this.bpform_submissions,
+            'client_mood': this.moodform.value['mood']
+        }
+
+        this.dataservice.uploadTestResults(clientBPdata).subscribe(data => {
+            this.userdata = data;
+            this.renderGraph()
+            this.bpform_submissions = [];
+            this.submissions_count = 0;
+            this.showBPForm = true;
+            this.showMoodForm = false;
+            this.confirmFormsInputs = false;
+        }, (error) => {
+
+        });
+    }
+
+    renderGraph(){
+        const systolicDataPoints = []
+        const diastolicDataPoints = []
+        const pulseDataPoints = []
+        // const dates = []
+
+        if(this.userdata.length > 0){
+            this.userdata = this.dataservice.setDateTime(this.userdata)
+            
+            let graphData;
+            if(this.userdata.length > 7){
+                graphData = this.userdata.slice((this.userdata.length-7));
+            } else {
+                graphData = this.userdata
+            }
+            let x = 'string';
+            for(let data of graphData){
+                systolicDataPoints.push(this.dataPointObject(data.average_SBP_per_upload, data.date))
+                diastolicDataPoints.push(this.dataPointObject(data.average_DBP_per_upload, data.date))
+                pulseDataPoints.push(this.dataPointObject(data.average_pulse_rate_per_upload, data.date))
+                // x++;
+            }
+        }
+
+        let chart = new CanvasJS.Chart("chartContainer", {
+        title:{
+            text: "Blood Pressure Analysis for Past Week"
+        },
+        // axisX: {
+        //     valueFormatString: "MMM YYYY"
+        // },
+        axisY:[
+        //     {
+        //     title: "Order",
+        //     lineColor: "#C24642",
+        //     tickColor: "#C24642",
+        //     labelFontColor: "#C24642",
+        //     titleFontColor: "#C24642",
+        //     suffix: "k"
+        // },
+        {
+            title: "Blood Pressure in mmHg",
+            lineColor: "#369EAD",
+            tickColor: "#369EAD",
+            labelFontColor: "#369EAD",
+            titleFontColor: "#369EAD",
+            suffix: "mm Hg"
+        }],
+
+        toolTip: {
+            shared: true
+        },
+        legend: {
+            cursor: "pointer",
+        },
+        data: [{
+            type: "line",
+            name: "Systolic BP",
+            color: "#369EAD",
+            showInLegend: true,
+            axisYIndex: 1,
+            dataPoints: systolicDataPoints
+            },
+        {
+            type: "line",
+            name: "Diastolic BP",
+            color: "#C24642",
+            axisYIndex: 0,
+            showInLegend: true,
+            dataPoints: diastolicDataPoints
+        }]
+        });
+        chart.render();        
+    }
+
+    dataPointObject(y,x){
+        x = new Date(x);
+        var date = `${x.getDate()}/${x.getMonth() + 1}`
+        const obj = {
+            label: date,
+            y: y
+        }
+        return obj;
+    }
+
+    get SBP() { return this.bpform.get('SBP'); }
+    get DBP() { return this.bpform.get('DBP'); }
+    get pulse_rate() { return this.bpform.get('pulse_rate'); }
 }

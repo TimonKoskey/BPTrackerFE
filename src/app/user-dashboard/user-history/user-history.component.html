@@ -8,19 +8,21 @@
                 <div class="card-body">
                     <table id="resent-table" style="width:100%">
                         <tr>
-                            <th style="width: 25%"><u><b>Date ( DD-MM-YYY )</b></u></th>
-                            <th style="width: 25%">Systolic (SBP)</th>
-                            <th style="width: 25%">Diastolic (DBP)</th>
-                            <th style="width: 25%"><u><b>Status</b></u></th>
+                            <th style="width: 20%"><u><b>Date ( DD-MM-YYY )</b></u></th>
+                            <th style="width: 20%">Systolic (SBP)</th>
+                            <th style="width: 20%">Diastolic (DBP)</th>
+                            <th style="width: 20%">Pulse Rate</th>
+                            <th style="width: 20%"><u><b>Status</b></u></th>
                         </tr>
-                        <tr *ngFor="let data of mockData; let i = index">
+                        <tr *ngFor="let data of userdata; let i = index">
                             <td>
                                 {{data['date']}}
-                                <span class="badge badge-pill badge-danger" *ngIf="i === (mockData.length - 1)">Last Update</span>
+                                <span class="badge badge-pill badge-danger" *ngIf="i === (userdata.length - 1)">Last Update</span>
                             </td>
-                            <td>{{data['SBP']}} mm Hg</td>
-                            <td>{{data['DBP']}} mm Hg</td> 
-                            <td [style.background-color]="getBackgroundColor(data.status)" style="color: black"><b>{{data.status}}</b></td>
+                            <td>{{data['average_SBP_per_upload']}} mm Hg</td>
+                            <td>{{data['average_DBP_per_upload']}} mm Hg</td>
+                            <td>{{data['average_pulse_rate_per_upload']}} mm Hg</td>
+                            <td [style.background-color]="getBackgroundColor(data.blood_pressure_status)" style="color: black"><b>{{data.blood_pressure_status}}</b></td>
                         </tr>
                     </table>
                 </div>

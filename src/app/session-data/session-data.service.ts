@@ -25,4 +25,26 @@ export class SessionDataService {
     get token(){
         return this.persistence.get('token', StorageType.SESSION)
     }
+
+    checkToken(){
+        const token = this.token
+        if (token){
+            return true
+        } else {
+            return false
+        }
+    }
+
+    checkUser(){
+        const user = this.user
+        if (user){
+            return true
+        } else {
+            return false
+        }
+    }
+
+    clearSessionData(){
+        this.persistence.removeAll(StorageType.SESSION)
+    }
 }
